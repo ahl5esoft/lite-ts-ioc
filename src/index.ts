@@ -3,10 +3,9 @@ const instance = {};
 /**
  * 获取实例
  * @param typer 键
- * @returns 
  */
 export function get<T>(typer: any) {
-    const key = typer.ctor ?? typer.name ?? typer;
+    const key = getKey(typer);
     if (key)
         return instance[key] as T;
 
@@ -14,10 +13,23 @@ export function get<T>(typer: any) {
 }
 
 /**
- * 
+ * 设置容器内容
  * @param typer 键
  * @param value 值
  */
 export function set(typer: any, value: any) {
-    instance[typer.ctor ?? typer.name ?? typer] = value;
+    const key = getKey(typer);
+    instance[key] = value;
+}
+
+/**
+ * 获取键
+ * @param typer 键
+ */
+function getKey(typer: any) {
+    if (typeof typer == 'string')
+        return typer;
+    else {
+        return typer.ctor ?? typer.name;
+    }
 }
