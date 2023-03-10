@@ -4,7 +4,6 @@
     "url": "https://github.com/ahl5esoft/lite-ts-ioc/issues"
   },
   "description": "依赖注入",
-  "dependencies": { },
   "devDependencies": {
     "@types/js-yaml": "^4.0.5",
     "@types/mocha": "^10.0.1",
