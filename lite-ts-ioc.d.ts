@@ -4,4 +4,3 @@ declare const ioc: {
     get: typeof get;
     set: typeof set;
 };
-{};
