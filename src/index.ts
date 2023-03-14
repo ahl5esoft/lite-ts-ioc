@@ -1,9 +1,13 @@
+type Typer = Function | string;
+
+export const injectMetadata: {
+    [component: string]: {
+        property: string;
+        typer: string;
+    }[]
+} = {};
 const instance = {};
 
-/**
- * 获取实例
- * @param typer 键
- */
 function get<T>(typer: any) {
     const key = getKey(typer);
     if (key)
@@ -12,22 +16,34 @@ function get<T>(typer: any) {
     throw new Error(`ioc.get: 缺少${key}`);
 }
 
-/**
- * 获取键
- * @param typer 键
- */
 function getKey(typer: any) {
     return typeof typer == 'string' ? typer : typer.ctor ?? typer.name;
 }
 
-/**
- * 设置容器内容
- * @param typer 键
- * @param value 值
- */
+function inject(target: object) {
+    const properties = injectMetadata[target.constructor.name] ?? [];
+    for (const r of properties) {
+        target[r.property] = get(r.typer);
+    }
+}
+
+function Inject(typer: Typer) {
+    return (target: object, property: string) => {
+        injectMetadata[target.constructor.name] ??= [
+            ...injectMetadata[Object.getPrototypeOf(
+                target.constructor,
+            ).name] ?? []
+        ];
+        injectMetadata[target.constructor.name].push({
+            property,
+            typer: getKey(typer)
+        });
+    };
+}
+
 function set(typer: any, value: any) {
     const key = getKey(typer);
     instance[key] = value;
 }
 
-export const ioc = { get, set };
+export const ioc = { get, inject, Inject, set };
