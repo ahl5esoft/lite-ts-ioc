@@ -4,7 +4,7 @@ export const injectMetadata: {
     [component: string]: {
         property: string;
         typer: string;
-    }[]
+    }[];
 } = {};
 const instance = {};
 
