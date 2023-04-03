@@ -8,7 +8,7 @@
     "@types/js-yaml": "^4.0.5",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.18",
-    "lite-ts-fs": "^1.4.1",
+    "lite-ts-fs": "^1.10.6",
     "lite-ts-mock": "^1.1.0",
     "terser-webpack-plugin": "^5.3.6",
     "ts-loader": "^9.4.2",

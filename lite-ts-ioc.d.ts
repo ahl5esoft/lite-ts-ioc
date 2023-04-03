@@ -14,4 +14,4 @@ declare const ioc: {
     inject: typeof inject;
     Inject: typeof Inject;
     set: typeof set;
-};
+};
