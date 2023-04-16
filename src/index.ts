@@ -46,4 +46,4 @@ function set(typer: any, value: any) {
     instance[key] = value;
 }
 
-export const ioc = { get, inject, Inject, set };
+export const ioc = { get, getKey, inject, Inject, set };
